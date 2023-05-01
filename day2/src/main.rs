@@ -1,5 +1,3 @@
-#![feature(slice_take)]
-
 use std::env;
 use crate::Outcome::{Draw, ILose, IWin};
 use crate::Play::{Paper, Rock, Scissors};
