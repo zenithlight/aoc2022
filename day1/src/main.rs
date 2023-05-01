@@ -12,15 +12,16 @@ fn main() {
 }
 
 fn a(input: String) -> usize {
+    // note to self: could use itertools::batching for the groups
     input.split("\n\n").map(|elf| {
         elf.split("\n").map(|snack| snack.parse::<usize>().unwrap()).sum()
     }).max().unwrap()
 }
 
 fn b(input: String) -> usize {
-    let mut total_calories_by_elf = input.split("\n\n").map(|elf| {
+    let mut total_calories_by_elf: Vec<usize> = input.split("\n\n").map(|elf| {
         elf.split("\n").map(|snack| snack.parse::<usize>().unwrap()).sum()
-    }).collect::<Vec<usize>>();
+    }).collect();
     total_calories_by_elf.sort();
     total_calories_by_elf.iter().rev().take(3).sum()
 }
