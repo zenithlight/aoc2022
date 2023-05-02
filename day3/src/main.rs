@@ -15,6 +15,7 @@ fn main() {
 }
 
 fn find_common_item(left_compartment: &str, right_compartment: &str) -> char {
+    // just wanted to try an overengineered solution for this one
     let mut left_compartment: Vec<_> = left_compartment.chars().collect();
     let mut right_compartment: Vec<_> = right_compartment.chars().collect();
     left_compartment.sort();
@@ -43,6 +44,7 @@ fn find_common_item(left_compartment: &str, right_compartment: &str) -> char {
 fn get_badge<'a, I>(chunk: &mut I) -> char where I: Iterator<Item = &'a str> {
     let mut candidates: HashSet<_> = HashSet::from_iter(chunk.next().unwrap().chars());
 
+    // can use reduce -> intersection instead
     for line in chunk {
         let ruled_out: HashSet<_> = HashSet::from_iter(line.chars());
         candidates = candidates.intersection(&ruled_out).copied().collect();
@@ -64,6 +66,7 @@ fn get_priority(item: char) -> usize {
 fn a(input: String) -> usize {
     input.split("\n").map(|line| {
         let halfway_point = line.len() / 2;
+        // can use split_at instead
         let (first_half, second_half) = (&line[..halfway_point], &line[halfway_point..]);
         get_priority(find_common_item(first_half, second_half))
     }).sum()
